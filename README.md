@@ -25,19 +25,19 @@ $ python macsafe.py
 
 #### 1) With 'nohup' command
 
-To start:
+**To start:**
 ```
 $ nohup python macsafe.py &
 ```
 
-To terminate:
+**To terminate:**
 ```
 $ ps aux | grep macsafe | awk '{print $2}' | xargs kill -9 2>/dev/null
 ```
 
 #### 2) With 'screen' command
 
-To start:
+**To start:**
 ```
 $ screen -t MACSAFE
 bash-3.2$ python macsafe.py
@@ -48,7 +48,7 @@ Press `Control` + `A` + `D`, then you can see:
 [detached]
 ```
 
-To terminate:
+**To terminate:**
 ```
 $ screen -list
 There are screens on:
