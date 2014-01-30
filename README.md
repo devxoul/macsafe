@@ -1,5 +1,5 @@
 # MacSafe
 
-Keep my MacBook safe.
+Keep your MacBook from thieves.
 
 ![macsafe.png](http://)
