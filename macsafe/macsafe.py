@@ -8,6 +8,8 @@ import subprocess
 #: A location of siren sound file.
 SOUND_LOCATION = "/Volumes/XOUL/Music/윤종신 - 너에게 간다 (With 김범수).mp3"
 
+# Previous Volume Level
+volume_level = '0'
 
 def check():
     """Check whether adapter is connected or not.
@@ -18,10 +20,22 @@ def check():
                          stderr=subprocess.PIPE)
     return 'No adapter attached' not in r.stdout.read()
 
+def volume_max(): 
+    global volume_level
+    cmd = "osascript -e 'output volume of (get volume settings)'; osascript -e 'set volume output volume 100'"
+    r = subprocess.Popen(cmd, shell=True,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    volume_level = r.stdout.read().split('\n')[0]
+
+def volume_recover():
+    cmd = "osascript -e 'set volume output volume %s'" % volume_level
+    subprocess.Popen(cmd, shell=True)
 
 def siren():
     """Ring the siren. RRRR!!!
     """
+    volume_max()
     cmd = 'afplay "%s"' % SOUND_LOCATION
     subprocess.Popen(cmd, shell=True)
     print "Ring the siren. RRRRRRR!!! RRRRRR!!!"
@@ -34,7 +48,7 @@ def calmdown():
     subprocess.Popen(cmd, shell=True,
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE)
-
+    volume_recover()
 
 def start():
     """Start macsafe.
